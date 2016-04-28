@@ -1,6 +1,6 @@
 # Gameknot Game Decoder
 
-This tool will allow you to paste in Gameknot interactive scripts and convert them to PGN format, quickly and easily.
+This tool will allow you to take a Gameknot interactive script (see below) and convert it into [PGN](https://en.wikipedia.org/wiki/Portable_Game_Notation) format, quickly and easily.
 
 #### Gameknot Script
 ```
