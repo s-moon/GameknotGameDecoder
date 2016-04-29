@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GameKnotDecoder
 {
@@ -17,7 +15,7 @@ namespace GameKnotDecoder
 
             pgn = ExportSTR() + 
                 "\n" + 
-                ExportPGN(script);
+                ExportMovesAsPGN(script);
             return pgn;
         }
 
@@ -67,13 +65,47 @@ namespace GameKnotDecoder
             return TagBracketLeft + "Result \"Unknown\"" + TagBracketRight;
         }
 
-        public static string ExportPGN(string script)
+        public static string ExportMovesAsPGN(string script)
         {
-            string moves = ExtractMoves(script);
-            return moves;
+            var sb = new StringBuilder();
+            var chessMoves = new List<ChessMove>();
+            int charactersLeft = 0;
+            string from;
+            string to;
+            string moves = ExtractMovesAsString(script);
+            for (int i = 0; i < moves.Length; i += 4)
+            {
+                charactersLeft = moves.Length - i;
+
+                from = null;
+                to = null;
+                if (charactersLeft < 2)
+                {
+                    throw new Exception("Input moves list is not complete.");
+                }
+                else if (charactersLeft >= 2)
+                {
+                    from = moves.Substring(i, 2);
+                }
+                if (charactersLeft >= 4)
+                {
+                    to = moves.Substring(i + 2, 2);
+                }
+                chessMoves.Add(new ChessMove(from, to));
+            }
+            int moveNumber = 1;
+            int itemNumber = 0;
+            while (chessMoves.Count > itemNumber)
+            {
+                sb.AppendFormat("{0}.{1} ", moveNumber++, chessMoves[itemNumber].To);
+                if (++itemNumber < chessMoves.Count)
+                    sb.AppendFormat("{0} ", chessMoves[itemNumber++].To);
+            }
+            sb.AppendFormat("\n");
+            return sb.ToString();
         }
 
-        private static string ExtractMoves(string script)
+        private static string ExtractMovesAsString(string script)
         {
             int startPos = script.IndexOf("o.im('");
             int endPos = script.IndexOf("o.il");
