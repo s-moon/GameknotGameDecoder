@@ -2,7 +2,9 @@
 
 This tool will allow you to take a Gameknot interactive script (see below) and convert it into [PGN](https://en.wikipedia.org/wiki/Portable_Game_Notation) format, quickly and easily.
 
-#### Gameknot Script
+#### Input
+JavaScript game code
+
 ```
 <!-- iChess v1.2, (c) 2007-2009 GameKnot.com -->
 <script type="text/javascript" src="http://e.ichess.com/ichess.js"></script>
@@ -22,3 +24,6 @@ This tool will allow you to take a Gameknot interactive script (see below) and c
 */o.go(0,0);}}/*
 */</script>
 ```
+
+#### Output
+PGN text.
