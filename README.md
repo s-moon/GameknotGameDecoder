@@ -26,4 +26,4 @@ JavaScript game code
 ```
 
 #### Output
-PGN text.
+PGN text
