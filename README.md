@@ -27,3 +27,7 @@ JavaScript game code
 
 #### Output
 PGN text
+
+#### Technologies Used
+ * C# / .NET
+ * NUnit
