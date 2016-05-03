@@ -101,7 +101,7 @@ namespace GameKnotDecoder
                 charactersLeft = moves.Length - i;
                 if (charactersLeft < 2)
                 {
-                    throw new Exception("Input moves list is not complete.");
+                    throw new Exception("Input moves list is not complete. Check for errors.");
                 }
                 else if (charactersLeft >= 2)
                 {
@@ -125,16 +125,16 @@ namespace GameKnotDecoder
             if (startPos == -1 || endPos == -1)
                 return string.Empty;
 
-            string moves = "";
+            StringBuilder moves = new StringBuilder();
             for (int i = startPos + 6; i < endPos - 5; i++)
             {
                 if (char.IsUpper(script[i]) || char.IsLower(script[i]) || char.IsDigit(script[i]))
                 {
-                    moves += script[i];
+                    moves.Append(script[i]);
                 }
             }
 
-            return moves;
+            return moves.ToString();
         }
     }
 }
