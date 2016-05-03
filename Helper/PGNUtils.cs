@@ -67,6 +67,27 @@ namespace GameKnotDecoder
 
         public static string ExportMovesAsOrderedString(string script)
         {
+            List<ChessMove> chessMoves = ExtractMovesAsList(script);
+            return ConvertMovesIntoOrderedString(chessMoves).ToString();
+        }
+
+        private static StringBuilder ConvertMovesIntoOrderedString(List<ChessMove> chessMoves)
+        {
+            var sb = new StringBuilder();
+            int moveNumber = 1;
+            int itemNumber = 0;
+            while (chessMoves.Count > itemNumber)
+            {
+                sb.AppendFormat("{0}.{1} ", moveNumber++, chessMoves[itemNumber++].To);
+                if (itemNumber < chessMoves.Count)
+                    sb.AppendFormat("{0} ", chessMoves[itemNumber++].To);
+            }
+            sb.AppendFormat("\n");
+            return sb;
+        }
+
+        private static List<ChessMove> ExtractMovesAsList(string script)
+        {
             string to;
             string from;
             int charactersLeft = 0;
@@ -93,17 +114,7 @@ namespace GameKnotDecoder
                 chessMoves.Add(new ChessMove(from, to));
             }
 
-            var sb = new StringBuilder();
-            int moveNumber = 1;
-            int itemNumber = 0;
-            while (chessMoves.Count > itemNumber)
-            {
-                sb.AppendFormat("{0}.{1} ", moveNumber++, chessMoves[itemNumber].To);
-                if (++itemNumber < chessMoves.Count)
-                    sb.AppendFormat("{0} ", chessMoves[itemNumber++].To);
-            }
-            sb.AppendFormat("\n");
-            return sb.ToString();
+            return chessMoves;
         }
 
         private static string ExtractAllMovesAsString(string script)
