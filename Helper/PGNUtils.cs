@@ -15,7 +15,7 @@ namespace GameKnotDecoder
 
             pgn = ExportSTR() + 
                 "\n" + 
-                ExportMovesAsPGN(script);
+                ExportMovesAsOrderedString(script);
             return pgn;
         }
 
@@ -65,20 +65,19 @@ namespace GameKnotDecoder
             return TagBracketLeft + "Result \"Unknown\"" + TagBracketRight;
         }
 
-        public static string ExportMovesAsPGN(string script)
+        public static string ExportMovesAsOrderedString(string script)
         {
-            var sb = new StringBuilder();
-            var chessMoves = new List<ChessMove>();
-            int charactersLeft = 0;
-            string from;
             string to;
-            string moves = ExtractMovesAsString(script);
+            string from;
+            int charactersLeft = 0;
+            var chessMoves = new List<ChessMove>();
+            string moves = ExtractAllMovesAsString(script);
+
             for (int i = 0; i < moves.Length; i += 4)
             {
-                charactersLeft = moves.Length - i;
-
                 from = null;
                 to = null;
+                charactersLeft = moves.Length - i;
                 if (charactersLeft < 2)
                 {
                     throw new Exception("Input moves list is not complete.");
@@ -93,6 +92,8 @@ namespace GameKnotDecoder
                 }
                 chessMoves.Add(new ChessMove(from, to));
             }
+
+            var sb = new StringBuilder();
             int moveNumber = 1;
             int itemNumber = 0;
             while (chessMoves.Count > itemNumber)
@@ -105,7 +106,7 @@ namespace GameKnotDecoder
             return sb.ToString();
         }
 
-        private static string ExtractMovesAsString(string script)
+        private static string ExtractAllMovesAsString(string script)
         {
             int startPos = script.IndexOf("o.im('");
             int endPos = script.IndexOf("o.il");
