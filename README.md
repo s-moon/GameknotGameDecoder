@@ -1,6 +1,6 @@
 # Gameknot Game Decoder
 
-This tool will allow you to take a [Gameknot](http://www.gameknot.com) interactive script (see below) and convert it into [PGN](https://en.wikipedia.org/wiki/Portable_Game_Notation) format, quickly and easily.
+This tool will allow you to take a [Gameknot](http://www.gameknot.com) interactive script (see below) and convert it into [PGN](https://en.wikipedia.org/wiki/Portable_Game_Notation) format, quickly and easily. Why might you need this? Perhaps like me, you converted some PGN into this format to use GameKnot's interactive game code and then promptly lost the original PGN! The problem is (as I have found when contacting GameKnot), you can't reverse the process and sadly their script doesn't play nicely on all implementations of WordPress.
 
 #### Input
 JavaScript game code
