@@ -26,7 +26,7 @@ JavaScript game code
 ```
 
 #### Output
-Somethiung akin to:
+Something akin to:
 ```
 [Event "F/S Return Match"]
 [Site "Belgrade, Serbia Yugoslavia|JUG"]
